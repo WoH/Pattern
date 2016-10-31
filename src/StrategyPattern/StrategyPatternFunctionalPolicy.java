@@ -1,4 +1,5 @@
 package StrategyPattern;
+
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
@@ -35,6 +36,8 @@ public class StrategyPatternFunctionalPolicy {
         boolean timeImportant = true;
         boolean spaceImportant= true;
         Integer[] array = {1, 2, 3};
-        sort(array, x -> timeImportant && spaceImportant, MergeSort);
+        sort(array, x -> timeImportant && !spaceImportant, MergeSort);
+        sort(array, x -> timeImportant && spaceImportant, QuickSort);
+        sort(array, x -> true, BubbleSort);
     }
 }
