@@ -1,11 +1,8 @@
 package StrategyPattern;
 
-import java.util.function.Predicate;
+import java.util.function.BiPredicate;
 import java.util.function.UnaryOperator;
 
-/**
- * Created by Wolfgang Hobmaier on 10/31/16.
- */
 public class StrategyPatternFunctionalPolicy {
     interface SortStrategy extends UnaryOperator<Integer[]> {
         @Override
@@ -27,17 +24,25 @@ public class StrategyPatternFunctionalPolicy {
         return new Integer[0];
     };
 
-    private static void sort(Integer[] array, Predicate<Void> applicable, SortStrategy sortStrategy){
-        if(applicable.test(null)) {
-            sortStrategy.apply(array);
-        }
+    interface SortPolicy<A, B> extends BiPredicate<A, B> { }
+
+    private static SortPolicy<Boolean, Boolean> MergeSortPolicy =
+            (timeImportant, spaceImportant) -> timeImportant && !spaceImportant;
+    private static SortPolicy<Boolean, Boolean> QuickSortPolicy =
+            (timeImportant, spaceImportant) -> timeImportant && spaceImportant;
+    private static SortPolicy<Boolean, Boolean> BubbleSortPolicy =
+            (timeImportant, spaceImportant) -> timeImportant && !spaceImportant;
+
+    private static SortStrategy Policy(boolean timeImportant, boolean spaceImportant) {
+        if(MergeSortPolicy.test(timeImportant, spaceImportant)) return MergeSort;
+        else if(QuickSortPolicy.test(timeImportant, spaceImportant)) return QuickSort;
+        else return BubbleSort;
     }
+
     public static void main(String[] args) {
         boolean timeImportant = true;
         boolean spaceImportant= true;
         Integer[] array = {1, 2, 3};
-        sort(array, x -> timeImportant && !spaceImportant, MergeSort);
-        sort(array, x -> timeImportant && spaceImportant, QuickSort);
-        sort(array, x -> true, BubbleSort);
+        Policy(timeImportant, spaceImportant).apply(array);
     }
 }

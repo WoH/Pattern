@@ -3,17 +3,13 @@ public class StrategyPatternFunctional {
     private interface SortStrategy {
         void performSort(int[] input);
     }
-    private static SortStrategy BubbleSort = new SortStrategy() {
-        public void performSort(int[] input) {
-            System.out.println("Using BubbleSort");
-            //implementation
-        }
+    private static SortStrategy BubbleSort = input -> {
+        System.out.println("Using BubbleSort");
+        //implementation
     };
-    private static SortStrategy QuickSort = new SortStrategy() {
-        public void performSort(int[] input) {
-            System.out.println("Using QuickSort");
-            //implementation
-        }
+    private static SortStrategy QuickSort = input -> {
+        System.out.println("Using QuickSort");
+        //implementation
     };
     private static SortStrategy MergeSort = input -> {
         System.out.println("Using MergeSort");
