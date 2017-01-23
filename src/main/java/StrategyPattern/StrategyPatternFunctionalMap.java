@@ -8,10 +8,7 @@ import java.util.function.UnaryOperator;
  * Created by whobmaier on 1/23/17.
  */
 public class StrategyPatternFunctionalMap {
-    interface SortStrategy extends UnaryOperator<Integer[]> {
-        @Override
-        Integer[] apply(Integer[] iS);
-    }
+    interface SortStrategy extends UnaryOperator<Integer[]> { };
     private static SortStrategy MergeSort = iS -> {
         // Implementation
         System.out.println("Using MergeSort");
@@ -29,7 +26,6 @@ public class StrategyPatternFunctionalMap {
     };
 
     interface SortPolicy<A, B> extends BiPredicate<A, B> { }
-
     private static SortPolicy<Boolean, Boolean> MergeSortPolicy =
             (timeImportant, spaceImportant) -> timeImportant && !spaceImportant;
     private static SortPolicy<Boolean, Boolean> QuickSortPolicy =
