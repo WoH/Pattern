@@ -25,12 +25,12 @@ public class StrategyPatternFunctionalMap {
         return new Integer[0];
     };
 
-    interface SortPolicy<A, B> extends BiPredicate<A, B> { }
-    private static SortPolicy<Boolean, Boolean> MergeSortPolicy =
+    interface SortPolicy extends BiPredicate<Boolean, Boolean> { }
+    private static SortPolicy MergeSortPolicy =
             (timeImportant, spaceImportant) -> timeImportant && !spaceImportant;
-    private static SortPolicy<Boolean, Boolean> QuickSortPolicy =
+    private static SortPolicy QuickSortPolicy =
             (timeImportant, spaceImportant) -> timeImportant && spaceImportant;
-    private static SortPolicy<Boolean, Boolean> BubbleSortPolicy =
+    private static SortPolicy BubbleSortPolicy =
             (timeImportant, spaceImportant) -> timeImportant && !spaceImportant;
 
     private static HashMap<SortPolicy, SortStrategy> hashMap = new HashMap<>();
@@ -50,7 +50,7 @@ public class StrategyPatternFunctionalMap {
 
     public static void main(String[] args) {
         boolean timeImportant = true;
-        boolean spaceImportant= true;
+        boolean spaceImportant = true;
         Integer[] array = {1, 2, 3};
         Policy(timeImportant, spaceImportant).apply(array);
     }
