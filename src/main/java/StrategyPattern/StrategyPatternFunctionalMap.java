@@ -1,6 +1,7 @@
 package StrategyPattern;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.function.BiPredicate;
 import java.util.function.UnaryOperator;
 
@@ -45,12 +46,14 @@ public class StrategyPatternFunctionalMap {
                 .filter((SortPolicy sortPolicy) -> sortPolicy.test(timeImportant, spaceImportant))
                 .map((SortPolicy sortPolicy) -> hashMap.get(sortPolicy))
                 .findFirst()
-                .get();
+                .orElse((iS) -> {
+                    throw new NoSuchElementException("No Strategy found!");
+                });
     }
 
     public static void main(String[] args) {
-        boolean timeImportant = true;
-        boolean spaceImportant = true;
+        boolean timeImportant = false;
+        boolean spaceImportant = false;
         Integer[] array = {1, 2, 3};
         Policy(timeImportant, spaceImportant).apply(array);
     }
