@@ -9,7 +9,7 @@ import java.util.function.UnaryOperator;
  * Created by whobmaier on 1/23/17.
  */
 public class StrategyPatternFunctionalMap {
-    interface SortStrategy extends UnaryOperator<Integer[]> { };
+    interface SortStrategy extends UnaryOperator<Integer[]> {}
     private static SortStrategy MergeSort = iS -> {
         // Implementation
         System.out.println("Using MergeSort");
@@ -26,7 +26,7 @@ public class StrategyPatternFunctionalMap {
         return new Integer[0];
     };
 
-    interface SortPolicy extends BiPredicate<Boolean, Boolean> { }
+    interface SortPolicy extends BiPredicate<Boolean, Boolean> {}
     private static SortPolicy MergeSortPolicy =
             (timeImportant, spaceImportant) -> timeImportant && !spaceImportant;
     private static SortPolicy QuickSortPolicy =
